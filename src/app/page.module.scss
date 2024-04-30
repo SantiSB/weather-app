@@ -1,0 +1,52 @@
+@import "./styles/variables.scss";
+
+.main {
+    padding: 20px;
+    text-align: center;
+}
+
+.searchForm {
+    max-width: 500px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+    @media (min-width: 768px) {
+        flex-direction: row;
+        align-items: stretch;
+    }
+
+    select,
+    input[type="text"] {
+        padding: 8px 16px;
+        width: 100%;
+        border: 2px solid $color-primary;
+        border-radius: 4px;
+        margin-bottom: 10px;
+
+        &:focus {
+            outline: none;
+            border-color: $color-secondary;
+        }
+
+        @media (min-width: 768px) {
+            width: auto;
+        }
+    }
+
+    button {
+        padding: 8px 16px;
+        background-color: $color-secondary;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: darken($color-secondary, 10%);
+        }
+    }
+}

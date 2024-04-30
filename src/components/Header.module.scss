@@ -1,0 +1,21 @@
+// Ejemplo de archivo Header.module.scss
+@import "../app/styles/variables";
+
+.header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+    background-color: #f8f9fa;
+    position: fixed; // Fija el header en la parte superior
+    width: 100%; // Asegura que ocupe toda la anchura
+    top: 0; // Alinea al borde superior
+    left: 0; // Alinea al borde izquierdo
+    z-index: 1000; // Asegura que el header se muestre sobre otros elementos
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); // Añade sombra para una mejor separación visual
+}
+
+.logo {
+    height: 80%;
+    margin-left: 20px; // Añade un pequeño margen para no estar pegado al borde
+}

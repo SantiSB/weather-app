@@ -1,0 +1,57 @@
+@import 'variables';
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: $font-size-base;
+}
+
+body {
+    color: $color-neutral-dark;
+    background-color: $color-neutral-light;
+    line-height: 1.6;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    margin-bottom: $space-md;
+}
+
+a {
+    color: $color-primary;
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+button {
+    background-color: $color-primary;
+    border: none;
+    padding: $space-sm $space-md;
+    color: white;
+    border-radius: $space-xs;
+    cursor: pointer;
+
+    &:hover {
+        background-color: darken($color-primary, 10%);
+    }
+}
+
+.mt-1 {
+    margin-top: $space-xs;
+}
+
+.mb-1 {
+    margin-bottom: $space-xs;
+}

@@ -1,41 +1,15 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
+import Image from "next/image";
+import styles from "./page.module.scss";
 import {
   fetchLocationByCity,
   fetchLocationByZip,
-  Location,
+  fetchWeatherByCoordinates,
 } from "@/services/fetch";
-import { fetchWeatherByCoordinates, WeatherData } from "@/services/fetch";
-import styles from "./page.module.scss";
-
-interface WeatherDay {
-  dt: number; // Unix timestamp
-  main: {
-    temp: number;
-    feels_like: number;
-    temp_min: number;
-    temp_max: number;
-    pressure: number;
-    humidity: number;
-  };
-  weather: {
-    id: number;
-    main: string;
-    description: string;
-    icon: string;
-  }[];
-  clouds: {
-    all: number;
-  };
-  wind: {
-    speed: number;
-    deg: number;
-    gust: number;
-  };
-  visibility: number;
-  pop: number; // Probability of precipitation
-}
+import { Location } from "@/types/location";
+import { WeatherData, WeatherDay } from "@/types/weather";
 
 const Forecast: React.FC = () => {
   const searchParams = useSearchParams();
@@ -48,7 +22,6 @@ const Forecast: React.FC = () => {
   const country = searchParams.get("country");
 
   useEffect(() => {
-    // Fetch location based on input parameters
     const fetchLocation = async () => {
       try {
         if (city) {
@@ -82,10 +55,9 @@ const Forecast: React.FC = () => {
           setWeather(weatherData);
           if (weatherData && weatherData.list) {
             const forecastMap = new Map();
-            // Assuming each timestamp is separated by 3 hours
             weatherData.list.forEach((item) => {
               const date = new Date(item.dt * 1000).toDateString();
-              if (!forecastMap.has(date) && forecastMap.size < 5) {
+              if (!forecastMap.has(date) && forecastMap.size < 6) {
                 forecastMap.set(date, item);
               }
             });
@@ -110,11 +82,49 @@ const Forecast: React.FC = () => {
         <p>Busqueda realizada por: {city ? "Ciudad" : "Código Postal"}</p>
         {zip && <p>Código de país: {location.country}</p>}
         {fiveDayForecast.map((day, index) => (
-          <div key={index}>
+          <div
+            key={index}
+            className={
+              index === 0 ? styles.currentDayForecast : styles.dayForecast
+            }
+          >
+            <h3>
+              {index === 0 ? "Hoy" : `Día ${index}:`}{" "}
+              {new Date(day.dt * 1000).toLocaleDateString()}
+            </h3>
             <p>
-              Día {index + 1}: {new Date(day.dt * 1000).toDateString()} - Temp:{" "}
-              {(day.main.temp - 273.15).toFixed(1)}°C
+              Temperatura: {(day.main.temp - 273.15).toFixed(1)}°C (Min:{" "}
+              {(day.main.temp_min - 273.15).toFixed(1)}°C, Max:{" "}
+              {(day.main.temp_max - 273.15).toFixed(1)}°C)
             </p>
+            <p>
+              Sensación térmica: {(day.main.feels_like - 273.15).toFixed(1)}°C
+            </p>
+            <p>
+              Presión: {day.main.pressure} hPa, Humedad: {day.main.humidity}%
+            </p>
+            <p>Visibilidad: {day.visibility / 1000} km</p>
+            <p>
+              Velocidad del viento: {day.wind.speed} m/s, Dirección:{" "}
+              {day.wind.deg}°
+            </p>
+            {day.rain && <p>Lluvia: {day.rain["3h"]} mm</p>}
+            {day.snow && <p>Nieve: {day.snow["3h"]} mm</p>}
+            <p>Nubosidad: {day.clouds.all}%</p>
+            <p>Probabilidad de precipitación: {(day.pop * 100).toFixed(0)}%</p>
+            {day.weather.map((w, wi) => (
+              <div key={wi}>
+                <p>
+                  {w.main}: {w.description}
+                </p>
+                <Image
+                  src={`http://openweathermap.org/img/wn/${w.icon}.png`}
+                  alt="Weather icon"
+                  width={50}
+                  height={50}
+                />
+              </div>
+            ))}
           </div>
         ))}
       </div>

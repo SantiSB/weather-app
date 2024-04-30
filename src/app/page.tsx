@@ -1,7 +1,7 @@
 "use client";
-import React, { useState } from "react";
-import styles from "./page.module.scss";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import styles from "./page.module.scss";
 
 const Home: React.FC = () => {
   const [searchType, setSearchType] = useState("city");

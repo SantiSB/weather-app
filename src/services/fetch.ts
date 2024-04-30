@@ -1,27 +1,10 @@
-interface LocalNames {
-    [key: string]: string;
-}
-
-export interface Location {
-    name: string;
-    local_names: LocalNames;
-    lat: number;
-    lon: number;
-    country: string;
-    state?: string;
-}
-
-export interface WeatherData {
-    current: any;
-    hourly: any[];
-    daily: any[];
-    list: any[];
-}
+import { Location } from "@/types/location";
+import { WeatherData } from "@/types/weather";
 
 const API_KEY = '211acb1d8857424de79d9a97ccaaeffd';
 
 export const fetchLocationByCity = async (city: string, state: string, country: string): Promise<Location[]> => {
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${encodeURIComponent(city)},${encodeURIComponent(state)},${encodeURIComponent(country)}&limit=1&appid=${API_KEY}`;
+    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=1&appid=${API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {
@@ -31,7 +14,7 @@ export const fetchLocationByCity = async (city: string, state: string, country: 
 }
 
 export const fetchLocationByZip = async (zip: string, country: string): Promise<Location> => {
-    const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${encodeURIComponent(zip)},${encodeURIComponent(country)}&appid=${API_KEY}`;
+    const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},${country}&appid=${API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {

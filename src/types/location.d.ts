@@ -1,6 +1,10 @@
+export interface LocalNames {
+    [key: string]: string;
+}
+
 export interface Location {
     name: string;
-    localNames: { [key: string]: string };
+    local_names: LocalNames;
     lat: number;
     lon: number;
     country: string;

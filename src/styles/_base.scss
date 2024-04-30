@@ -8,6 +8,8 @@
 
 html {
     font-size: $font-size-base;
+    scroll-behavior: smooth;
+
 }
 
 body {
@@ -16,11 +18,12 @@ body {
     line-height: 1.6;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+
+h1 {
+    font-size: 2.5rem;
+    color: $color-primary;
+}
+
 h6 {
     font-weight: normal;
     margin-bottom: $space-md;

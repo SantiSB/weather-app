@@ -10,6 +10,7 @@ import {
 } from "@/services/fetch";
 import { Location } from "@/types/location";
 import { WeatherData, WeatherDay } from "@/types/weather";
+import Loading from "@/components/Loading";
 
 const Forecast: React.FC = () => {
   const searchParams = useSearchParams();
@@ -72,14 +73,13 @@ const Forecast: React.FC = () => {
   }, [location]);
 
   if (!location || !weather || fiveDayForecast.length === 0) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   return (
     <div className={styles.container}>
       <h1>Clima en {location.name}</h1>
       <div className={styles.locationContainer}>
-        <p>Busqueda realizada por: {city ? "Ciudad" : "Código Postal"}</p>
         {zip && <p>Código de país: {location.country}</p>}
         {fiveDayForecast.map((day, index) => (
           <div

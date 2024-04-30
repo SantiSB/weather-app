@@ -6,8 +6,14 @@ import styles from "./page.module.scss";
 const Home: React.FC = () => {
   const [searchType, setSearchType] = useState("city");
   const [input, setInput] = useState("");
-  const [country, setCountry] = useState("ES");
+  const [country, setCountry] = useState("");
   const router = useRouter();
+
+  const handleSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSearchType(e.target.value);
+    setInput("");
+    setCountry("");
+  }
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -23,8 +29,9 @@ const Home: React.FC = () => {
       <h1>Consulta el clima</h1>
       <form className={styles.searchForm} onSubmit={handleSubmit}>
         <select
+          className={styles.formControl}
           value={searchType}
-          onChange={(e) => setSearchType(e.target.value)}
+          onChange={(e) => handleSelect(e)}
         >
           <option value="city">Ciudad</option>
           <option value="zip">Código Postal</option>
@@ -33,6 +40,7 @@ const Home: React.FC = () => {
           type="text"
           id="searchInput"
           name="searchInput"
+          className={styles.formControl}
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={
@@ -47,13 +55,16 @@ const Home: React.FC = () => {
             type="text"
             id="country"
             name="country"
+            className={styles.formControl}
             value={country}
             onChange={(e) => setCountry(e.target.value)}
             placeholder="Código de país (Ej: ES)"
             required
           />
         )}
-        <button type="submit">Buscar</button>
+        <button type="submit" className={styles.formButton}>
+          Buscar
+        </button>
       </form>
     </main>
   );

@@ -4,7 +4,7 @@ import { WeatherData } from "@/types/weather";
 const API_KEY = '211acb1d8857424de79d9a97ccaaeffd';
 
 export const fetchLocationByCity = async (city: string, state: string, country: string): Promise<Location[]> => {
-    const url = `http://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=1&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},${country}&limit=1&appid=${API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {
@@ -14,7 +14,7 @@ export const fetchLocationByCity = async (city: string, state: string, country: 
 }
 
 export const fetchLocationByZip = async (zip: string, country: string): Promise<Location> => {
-    const url = `http://api.openweathermap.org/geo/1.0/zip?zip=${zip},${country}&appid=${API_KEY}`;
+    const url = `https://api.openweathermap.org/geo/1.0/zip?zip=${zip},${country}&appid=${API_KEY}`;
 
     const response = await fetch(url);
     if (!response.ok) {

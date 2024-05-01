@@ -1,6 +1,6 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import styles from "../app/forecast/page.module.scss";
+import styles from "./ForecastComponent.module.scss";
 import Loading from "@/components/Loading";
 import useWeatherData from "@/hooks/useWeather";
 import useLocationFetch from "@/hooks/useLocation";

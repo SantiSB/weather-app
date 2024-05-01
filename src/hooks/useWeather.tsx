@@ -26,7 +26,7 @@ const useWeatherData = (location: Location | null) => {
             const forecastMap = new Map();
             weatherData.list.forEach((item) => {
               const date = new Date(item.dt * 1000);
-              const dateString = date.toUTCString().substring(0, 16); // Use UTC date string to avoid timezone issues
+              const dateString = date.toUTCString().substring(0, 16);
               if (!forecastMap.has(dateString)) {
                 forecastMap.set(dateString, []);
               }
@@ -35,7 +35,7 @@ const useWeatherData = (location: Location | null) => {
             const sortedDates = Array.from(forecastMap.keys()).sort(
               (a, b) => new Date(a).getTime() - new Date(b).getTime()
             );
-            const today = sortedDates.shift(); // Assumes today's date is the first item
+            const today = sortedDates.shift();
             setCurrentDayForecast(forecastMap.get(today)[0]);
             setHourlyTemperatures(forecastMap.get(today));
             setFiveDayForecast(

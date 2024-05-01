@@ -1,16 +1,6 @@
 "use client";
+import { Particle } from "@/types/background";
 import React, { useRef, useEffect } from "react";
-
-interface Particle {
-  x: number;
-  y: number;
-  size: number;
-  opacity: number;
-  rotation: number;
-  rotationSpeed: number;
-  update: () => void;
-  draw: (ctx: CanvasRenderingContext2D, smokeImage: HTMLImageElement) => void;
-}
 
 const Background: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -111,7 +101,6 @@ const Background: React.FC = () => {
       window.removeEventListener("resize", () => {});
       cancelAnimationFrame(raf);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

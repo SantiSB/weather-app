@@ -1,26 +1,21 @@
-// Importaciones necesarias
 import dynamic from "next/dynamic";
 import { useState, useEffect } from "react";
 import { ChartOptions, WeatherChartProps } from "@/types/chart";
 
-// Importa ApexCharts dinámicamente con SSR desactivado
 const ApexCharts = dynamic(() => import("react-apexcharts"), {
-  ssr: false, // Deshabilita server-side rendering para ApexCharts
+  ssr: false,
 });
 
 const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
   const [categories, setCategories] = useState<string[]>([]);
   const [series, setSeries] = useState<any[]>([]);
 
-  // Preparar los datos para los gráficos sólo en el cliente
   useEffect(() => {
     const cat = hourlyTemperatures.map((temp) => {
-      const date = new Date(temp.dt * 1000); // Convertir timestamp a objeto Date
-      return `${date.getHours()}:00`; // Formatear hora
+      const date = new Date(temp.dt * 1000);
+      return `${date.getHours()}:00`;
     });
-    const temps = hourlyTemperatures.map(
-      (temp) => temp.main.temp - 273.15 // Convertir de Kelvin a Celsius
-    );
+    const temps = hourlyTemperatures.map((temp) => temp.main.temp - 273.15);
 
     setCategories(cat);
     setSeries([
@@ -35,9 +30,20 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
     chart: {
       id: "temperature-chart",
       toolbar: {
-        show: false,
+        show: true,
+        tools: {
+          download: true,
+          selection: true,
+          zoom: true,
+          zoomin: true,
+          zoomout: true,
+          pan: true,
+          reset: true,
+        },
+        autoSelected: "zoom",
       },
     },
+
     xaxis: {
       categories,
       labels: {
@@ -49,7 +55,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
         text: "Temperatura (°C)",
       },
       labels: {
-        formatter: (value: number) => value.toFixed(2), // Asegúrate de que el formatter maneje un número
+        formatter: (value: number) => value.toFixed(2),
       },
     },
     responsive: [

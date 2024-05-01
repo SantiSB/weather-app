@@ -14,6 +14,16 @@ export type ChartOptions = {
         id: string;
         toolbar: {
             show: boolean;
+            tools: {
+                download: boolean;
+                selection: boolean;
+                zoom: boolean;
+                zoomin: boolean;
+                zoomout: boolean;
+                pan: boolean;
+                reset: boolean;
+            };
+            autoSelected: "zoom" | "selection" | "pan" | undefined;
         };
     };
     xaxis: {

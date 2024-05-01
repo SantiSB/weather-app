@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./DayForecast.module.scss";
 import { DayForecastProps } from "@/types/dayForecast";

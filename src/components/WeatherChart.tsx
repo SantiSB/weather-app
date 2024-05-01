@@ -1,23 +1,35 @@
-"use client";
+// Importaciones necesarias
+import dynamic from "next/dynamic";
+import { useState, useEffect } from "react";
 import { ChartOptions, WeatherChartProps } from "@/types/chart";
-import ApexCharts from "react-apexcharts";
+
+// Importa ApexCharts dinámicamente con SSR desactivado
+const ApexCharts = dynamic(() => import("react-apexcharts"), {
+  ssr: false, // Deshabilita server-side rendering para ApexCharts
+});
 
 const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
-  const categories = hourlyTemperatures.map((temp) => {
-    const date = new Date(temp.dt * 1000);
-    return `${date.getHours()}:00`;
-  });
+  const [categories, setCategories] = useState<string[]>([]);
+  const [series, setSeries] = useState<any[]>([]);
 
-  const temperatures = hourlyTemperatures.map(
-    (temp) => temp.main.temp - 273.15
-  );
+  // Preparar los datos para los gráficos sólo en el cliente
+  useEffect(() => {
+    const cat = hourlyTemperatures.map((temp) => {
+      const date = new Date(temp.dt * 1000); // Convertir timestamp a objeto Date
+      return `${date.getHours()}:00`; // Formatear hora
+    });
+    const temps = hourlyTemperatures.map(
+      (temp) => temp.main.temp - 273.15 // Convertir de Kelvin a Celsius
+    );
 
-  const series = [
-    {
-      name: "Temperatura (°C)",
-      data: temperatures,
-    },
-  ];
+    setCategories(cat);
+    setSeries([
+      {
+        name: "Temperatura (°C)",
+        data: temps,
+      },
+    ]);
+  }, [hourlyTemperatures]);
 
   const options: ChartOptions = {
     chart: {
@@ -37,7 +49,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
         text: "Temperatura (°C)",
       },
       labels: {
-        formatter: (value) => value.toFixed(2),
+        formatter: (value: number) => value.toFixed(2), // Asegúrate de que el formatter maneje un número
       },
     },
     responsive: [

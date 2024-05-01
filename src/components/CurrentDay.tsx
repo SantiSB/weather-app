@@ -1,3 +1,4 @@
+"use client";
 import Image from "next/image";
 import styles from "./CurrentDay.module.scss";
 import { CurrentDayForecastProps } from "@/types/currentDay";
@@ -23,7 +24,9 @@ export default function CurrentDay({
                   width={50}
                   height={50}
                 />
-                <p><strong>{weather.description.toLocaleUpperCase()}</strong></p>
+                <p>
+                  <strong>{weather.description.toLocaleUpperCase()}</strong>
+                </p>
               </div>
             ))}
           </div>

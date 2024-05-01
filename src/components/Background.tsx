@@ -21,21 +21,15 @@ const Background: React.FC = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const ctx = canvas?.getContext("2d");
-    if (!canvas || !ctx) return;
-
     let raf: number;
     let particles: Particle[] = [];
     const smokeImage = new Image();
     smokeImage.src = "/cloud.webp";
 
-    const resizeCanvas = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight + 100;
-      initParticles();
-    };
+    if (!canvas || !ctx) return;
 
-    window.addEventListener("resize", resizeCanvas);
-    resizeCanvas();
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight + 100;
 
     class ParticleImpl implements Particle {
       x: number;
@@ -70,12 +64,12 @@ const Background: React.FC = () => {
           this.size,
           this.size
         );
+        ctx.globalAlpha = 1.0;
         ctx.restore();
       }
     }
 
     const initParticles = () => {
-      particles = [];
       const { width, height } = canvas;
       for (let i = 0; i < NUM_PARTICLES; i++) {
         particles.push(new ParticleImpl(width, height));
@@ -83,8 +77,7 @@ const Background: React.FC = () => {
     };
 
     const handleParticles = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((particle) => {
+      particles.forEach((particle, index) => {
         particle.update();
         particle.draw(ctx, smokeImage);
       });
@@ -92,15 +85,30 @@ const Background: React.FC = () => {
 
     const animate = () => {
       raf = requestAnimationFrame(animate);
-      handleParticles();
+      const now = Date.now();
+      const elapsed = now - (now % fpsInterval);
+
+      if (elapsed > fpsInterval) {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        handleParticles();
+      }
     };
 
+    window.addEventListener("resize", () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight + 100;
+      cancelAnimationFrame(raf);
+      initParticles();
+      animate();
+    });
+
     smokeImage.onload = () => {
+      initParticles();
       animate();
     };
 
     return () => {
-      window.removeEventListener("resize", resizeCanvas);
+      window.removeEventListener("resize", () => {});
       cancelAnimationFrame(raf);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps

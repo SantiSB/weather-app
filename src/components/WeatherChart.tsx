@@ -1,3 +1,4 @@
+"use client";
 import { ChartOptions, WeatherChartProps } from "@/types/chart";
 import ApexCharts from "react-apexcharts";
 
@@ -22,7 +23,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
     chart: {
       id: "temperature-chart",
       toolbar: {
-        show: false, 
+        show: false,
       },
     },
     xaxis: {

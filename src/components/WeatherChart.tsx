@@ -1,30 +1,6 @@
+import { ChartOptions, WeatherChartProps } from "@/types/chart";
 import React from "react";
 import ApexCharts from "react-apexcharts";
-
-interface WeatherDay {
-  dt: number;
-  main: {
-    temp: number;
-  };
-}
-
-interface WeatherChartProps {
-  hourlyTemperatures: WeatherDay[];
-}
-
-type ChartOptions = {
-  chart: {
-    id: string;
-  };
-  xaxis: {
-    categories: string[];
-  };
-  yaxis: {
-    title: {
-      text: string;
-    };
-  };
-};
 
 const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
   const categories = hourlyTemperatures.map((temp) => {
@@ -46,15 +22,52 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
   const options: ChartOptions = {
     chart: {
       id: "temperature-chart",
+      toolbar: {
+        show: false, 
+      },
     },
     xaxis: {
       categories,
+      labels: {
+        rotate: -45,
+      },
     },
     yaxis: {
       title: {
         text: "Temperatura (°C)",
       },
+      labels: {
+        formatter: (value) => value.toFixed(2),
+      },
     },
+    responsive: [
+      {
+        breakpoint: 1000,
+        options: {
+          chart: {
+            height: 300,
+          },
+          xaxis: {
+            labels: {
+              rotate: 0,
+            },
+          },
+        },
+      },
+      {
+        breakpoint: 480,
+        options: {
+          chart: {
+            height: 200,
+          },
+          xaxis: {
+            labels: {
+              rotate: 0,
+            },
+          },
+        },
+      },
+    ],
   };
 
   return (
@@ -63,7 +76,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
         options={options}
         series={series}
         type="area"
-        width="1000"
+        width="100%"
         height="320"
       />
     </div>

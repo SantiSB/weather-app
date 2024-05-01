@@ -1,16 +1,7 @@
-'use client'
+"use client";
 import React from "react";
 import styles from "./SearchForm.module.scss";
-
-interface SearchFormProps {
-  searchType: string;
-  input: string;
-  country: string;
-  handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  setInput: React.Dispatch<React.SetStateAction<string>>;
-  setCountry: React.Dispatch<React.SetStateAction<string>>;
-}
+import { SearchFormProps } from "@/types/searchForm";
 
 const SearchForm: React.FC<SearchFormProps> = ({
   searchType,
@@ -55,9 +46,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           required
         />
       )}
-      <button type="submit">
-        Buscar
-      </button>
+      <button type="submit">Buscar</button>
     </form>
   );
 };

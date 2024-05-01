@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.scss";
 import Header from "@/components/Header";
+import { ViewTransitions } from "next-view-transitions";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,12 +17,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Header />
-        <div style={{ height: "100px" }}></div>
-        {children}
-      </body>
-    </html>
+    <ViewTransitions>
+      <html lang="en">
+        <body className={inter.className}>
+          <Header />
+          <div style={{ height: "100px" }}></div>
+          {children}
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }

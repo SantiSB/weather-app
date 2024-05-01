@@ -7,3 +7,13 @@ export interface UseSearchForm {
     setInput: React.Dispatch<React.SetStateAction<string>>;
     setCountry: React.Dispatch<React.SetStateAction<string>>;
 }
+
+export interface SearchFormProps {
+    searchType: string;
+    input: string;
+    country: string;
+    handleSelect: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+    handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
+    setInput: React.Dispatch<React.SetStateAction<string>>;
+    setCountry: React.Dispatch<React.SetStateAction<string>>;
+}

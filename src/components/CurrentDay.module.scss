@@ -20,15 +20,13 @@
     }
 
     .chart {
-        flex: 70%;
-
+        padding: 0rem 1rem;
         @media (min-width: 768px) {
             flex: 75%;
         }
     }
 
     .details {
-        flex: 30%;
         display: flex;
         flex-direction: column;
         text-align: left;
@@ -60,7 +58,6 @@
 
         p {
             color: $color-neutral-light;
-            font-size: 15pt;
             font-weight: 500;
             display: flex;
             align-items: center;

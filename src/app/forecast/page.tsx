@@ -1,6 +1,5 @@
 "use client";
 import { useSearchParams } from "next/navigation";
-import Image from "next/image";
 import styles from "./page.module.scss";
 import Loading from "@/components/Loading";
 import useWeatherData from "@/hooks/useWeather";
@@ -36,12 +35,13 @@ const Forecast: React.FC = () => {
   return (
     <div className={styles.container}>
       <h1>Clima en {location.name}</h1>
-      <div className={styles.locationContainer}>
-        {zip && <p>Código de país: {location.country}</p>}
+      <div className={styles.currentDayContainer}>
         <CurrentDay
           currentDayForecast={currentDayForecast}
           hourlyTemperatures={hourlyTemperatures}
         />
+      </div>
+      <div className={styles.fiveDayContainer}>
         {fiveDayForecast.map((day, index) => (
           <DayForecast key={index} day={day} index={index} />
         ))}

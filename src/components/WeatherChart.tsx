@@ -1,6 +1,17 @@
 import React from "react";
 import ApexCharts from "react-apexcharts";
 
+interface WeatherDay {
+  dt: number;
+  main: {
+    temp: number; // Asegúrate de que esto está en grados Kelvin si necesitas convertirlo a Celsius
+  };
+}
+
+interface WeatherChartProps {
+  hourlyTemperatures: WeatherDay[];
+}
+
 type ChartOptions = {
   chart: {
     id: string;
@@ -8,22 +19,41 @@ type ChartOptions = {
   xaxis: {
     categories: string[];
   };
+  yaxis: {
+    title: {
+      text: string;
+    };
+  };
 };
 
-const WeatherChart: React.FC = () => {
+const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
+  const categories = hourlyTemperatures.map((temp) => {
+    const date = new Date(temp.dt * 1000); // Convertir de timestamp a fecha
+    return `${date.getHours()}:00`; // Formato de hora
+  });
+
+  const temperatures = hourlyTemperatures.map(
+    (temp) => temp.main.temp - 273.15
+  ); // Convertir de Kelvin a Celsius si necesario
+
   const series = [
     {
-      name: "temperatura",
-      data: [20, 22, 26, 28, 25, 22],
+      name: "Temperatura (°C)",
+      data: temperatures,
     },
   ];
 
   const options: ChartOptions = {
     chart: {
-      id: "basic-area",
+      id: "temperature-chart",
     },
     xaxis: {
-      categories: ["06:00", "09:00", "12:00", "15:00", "18:00", "21:00"],
+      categories,
+    },
+    yaxis: {
+      title: {
+        text: "Temperatura (°C)",
+      },
     },
   };
 

@@ -16,12 +16,15 @@
     }
 }
 
-.locationContainer {
+.currentDayContainer {
+    margin-bottom: 30px;
+}
+
+.fiveDayContainer {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: auto;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 20px;
 
     @media (max-width: 768px) {

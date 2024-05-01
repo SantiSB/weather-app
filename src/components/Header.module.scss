@@ -5,16 +5,16 @@
     justify-content: center;
     align-items: center;
     height: 100px;
-    background-color: #f8f9fa;
+    background-color: $color-neutral-light;
     position: fixed;
     width: 100%;
-    top: 0; 
+    top: 0;
     left: 0;
     z-index: 1000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba($color-neutral-dark, 0.1);
 }
 
 .logo {
     height: 80%;
-    margin-left: 20px;
+    margin-left: $space-md;
 }

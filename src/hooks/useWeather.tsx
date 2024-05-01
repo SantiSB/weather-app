@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { useEffect, useState } from "react";
 import { fetchWeatherByCoordinates } from "@/services/fetch";
 import { Location } from "@/types/location";
@@ -25,20 +25,21 @@ const useWeatherData = (location: Location | null) => {
           if (weatherData && weatherData.list) {
             const forecastMap = new Map();
             weatherData.list.forEach((item) => {
-              const date = new Date(item.dt * 1000).toDateString();
-              if (!forecastMap.has(date)) {
-                forecastMap.set(date, []);
+              const date = new Date(item.dt * 1000);
+              const dateString = date.toUTCString().substring(0, 16); // Use UTC date string to avoid timezone issues
+              if (!forecastMap.has(dateString)) {
+                forecastMap.set(dateString, []);
               }
-              forecastMap.get(date).push(item);
+              forecastMap.get(dateString).push(item);
             });
             const sortedDates = Array.from(forecastMap.keys()).sort(
               (a, b) => new Date(a).getTime() - new Date(b).getTime()
             );
-            const today = sortedDates.shift();
+            const today = sortedDates.shift(); // Assumes today's date is the first item
             setCurrentDayForecast(forecastMap.get(today)[0]);
             setHourlyTemperatures(forecastMap.get(today));
             setFiveDayForecast(
-              sortedDates.map((date) => forecastMap.get(date)[0])
+              sortedDates.slice(0, 5).map((date) => forecastMap.get(date)[0])
             );
           }
         } catch (error) {

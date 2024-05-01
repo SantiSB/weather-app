@@ -55,7 +55,7 @@ const SearchForm: React.FC<SearchFormProps> = ({
           required
         />
       )}
-      <button type="submit" className={styles.formButton}>
+      <button type="submit">
         Buscar
       </button>
     </form>

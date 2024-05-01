@@ -63,7 +63,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
         options={options}
         series={series}
         type="area"
-        width="500"
+        width="1000"
         height="320"
       />
     </div>

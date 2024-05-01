@@ -28,16 +28,3 @@
         box-shadow: 0 0 0 3px rgba($color-secondary, 0.5);
     }
 }
-
-.formButton {
-    background-color: $color-secondary;
-    color: white;
-    border: none;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.3s;
-
-    &:hover {
-        background-color: darken($color-secondary, 10%);
-        transform: scale(1.05);
-    }
-}

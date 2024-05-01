@@ -4,7 +4,7 @@ import ApexCharts from "react-apexcharts";
 interface WeatherDay {
   dt: number;
   main: {
-    temp: number; // Asegúrate de que esto está en grados Kelvin si necesitas convertirlo a Celsius
+    temp: number;
   };
 }
 
@@ -28,13 +28,13 @@ type ChartOptions = {
 
 const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
   const categories = hourlyTemperatures.map((temp) => {
-    const date = new Date(temp.dt * 1000); // Convertir de timestamp a fecha
-    return `${date.getHours()}:00`; // Formato de hora
+    const date = new Date(temp.dt * 1000);
+    return `${date.getHours()}:00`;
   });
 
   const temperatures = hourlyTemperatures.map(
     (temp) => temp.main.temp - 273.15
-  ); // Convertir de Kelvin a Celsius si necesario
+  );
 
   const series = [
     {

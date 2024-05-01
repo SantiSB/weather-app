@@ -10,7 +10,7 @@ export default function CurrentDay({
   return (
     <div className={styles.currentDayForecast}>
       <h3>
-        Hoy: {new Date(currentDayForecast.dt * 1000).toLocaleDateString()}
+        Today: {new Date(currentDayForecast.dt * 1000).toLocaleDateString()}
       </h3>
       <div className={styles.content}>
         <div className={styles.chart}>
@@ -23,8 +23,8 @@ export default function CurrentDay({
                 <Image
                   src={`http://openweathermap.org/img/wn/${weather.icon}.png`}
                   alt="Weather icon"
-                  width={50}
-                  height={50}
+                  width={70}
+                  height={70}
                 />
                 <p>
                   {weather.main}: {weather.description}
@@ -34,25 +34,25 @@ export default function CurrentDay({
           </div>
           <div className={styles.additionalInfo}>
             <p>
-              Temperatura: {(currentDayForecast.main.temp - 273.15).toFixed(1)}
+              Temperature: {(currentDayForecast.main.temp - 273.15).toFixed(1)}
               °C
             </p>
             <p>
-              Sensación térmica:{" "}
+              Feels like:{" "}
               {(currentDayForecast.main.feels_like - 273.15).toFixed(1)}°C
             </p>
             <p>
-              Presión: {currentDayForecast.main.pressure} hPa, Humedad:{" "}
+              Pressure: {currentDayForecast.main.pressure} hPa, Humidity:{" "}
               {currentDayForecast.main.humidity}%
             </p>
-            <p>Visibilidad: {currentDayForecast.visibility / 1000} km</p>
+            <p>Visibility: {currentDayForecast.visibility / 1000} km</p>
             <p>
-              Velocidad del viento: {currentDayForecast.wind.speed} m/s,
-              Dirección: {currentDayForecast.wind.deg}°
+              Wind Speed: {currentDayForecast.wind.speed} m/s,
+              Direction: {currentDayForecast.wind.deg}°
             </p>
-            <p>Nubosidad: {currentDayForecast.clouds.all}%</p>
+            <p>Cloudiness: {currentDayForecast.clouds.all}%</p>
             <p>
-              Probabilidad de precipitación:{" "}
+              Probability of Precipitation:{" "}
               {(currentDayForecast.pop * 100).toFixed(0)}%
             </p>
           </div>

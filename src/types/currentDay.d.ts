@@ -1,4 +1,3 @@
-// Interfaces comunes
 export interface Weather {
     id: number;
     main: string;
@@ -32,10 +31,10 @@ export interface DayForecast {
     clouds: {
         all: number;
     };
-    pop: number;  // Probability of precipitation
+    pop: number;
 }
 
-// Props para cada componente
+
 export interface CurrentDayForecastProps {
     currentDayForecast: DayForecast;
     hourlyTemperatures: HourlyWeather[];

@@ -1,24 +1,25 @@
 @import "@/styles/variables.scss";
 
 .dayForecast {
-    background-color: #fff;
+    background-color: $color-neutral-dark;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
 
     &:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
     }
 
-    h3 {
+    h4 {
         color: $color-secondary;
     }
 
     p {
         margin: 5px 0;
-        font-size: 0.9rem;
+        font-size: 0.7rem;
         color: lighten($color-secondary, 20%);
     }
 }

@@ -34,7 +34,7 @@ const Forecast: React.FC = () => {
 
   return (
     <div className={styles.container}>
-      <h1>Clima en {location.name}</h1>
+      <h1>Weather in {location.name}</h1>
       <h3>
         Today: {new Date(currentDayForecast.dt * 1000).toLocaleDateString()}
       </h3>

@@ -8,7 +8,7 @@ const Home: React.FC = () => {
 
   return (
     <main className={styles.main}>
-      <h1>Consulta el clima</h1>
+      <h1>Check the weather</h1>
       <SearchForm {...searchProps} />
     </main>
   );

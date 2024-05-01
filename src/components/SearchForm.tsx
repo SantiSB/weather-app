@@ -19,8 +19,8 @@ const SearchForm: React.FC<SearchFormProps> = ({
         value={searchType}
         onChange={handleSelect}
       >
-        <option value="city">Ciudad</option>
-        <option value="zip">Código Postal</option>
+        <option value="city">City</option>
+        <option value="zip">Zip Code</option>
       </select>
       <input
         type="text"
@@ -30,8 +30,8 @@ const SearchForm: React.FC<SearchFormProps> = ({
         onChange={(e) => setInput(e.target.value)}
         placeholder={
           searchType === "city"
-            ? "Ingresa una ciudad"
-            : "Ingresa un código postal"
+            ? "Enter a city"
+            : "Enter a zip code"
         }
         required
       />
@@ -42,11 +42,11 @@ const SearchForm: React.FC<SearchFormProps> = ({
           className={styles.formControl}
           value={country}
           onChange={(e) => setCountry(e.target.value)}
-          placeholder="Código de país (Ej: ES)"
+          placeholder="Country code (e.g. US)"
           required
         />
       )}
-      <button type="submit">Buscar</button>
+      <button type="submit">Search</button>
     </form>
   );
 };

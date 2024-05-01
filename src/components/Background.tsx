@@ -14,9 +14,9 @@ interface Particle {
 
 const Background: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const NUM_PARTICLES = 500;
+  const NUM_PARTICLES = 80;
   const fps = 30;
-  const fpsInterval = 800 / fps;
+  const fpsInterval = 80 / fps;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -128,12 +128,7 @@ const Background: React.FC = () => {
       <canvas
         ref={canvasRef}
         aria-label="Cloud Effect"
-        style={{
-          opacity: 0.5,
-          ...({
-            "@media (prefers-color-scheme: dark)": { opacity: 0.5 },
-          } as React.CSSProperties),
-        }}
+        style={{ opacity: 0.5 }}
       ></canvas>
     </div>
   );

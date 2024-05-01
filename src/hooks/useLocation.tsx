@@ -1,4 +1,4 @@
-// hooks/useLocationFetch.ts
+"use client";
 import { useState, useEffect } from "react";
 import { fetchLocationByCity, fetchLocationByZip } from "@/services/fetch";
 import { Location } from "@/types/location";

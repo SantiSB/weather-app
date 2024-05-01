@@ -1,5 +1,4 @@
 import { ChartOptions, WeatherChartProps } from "@/types/chart";
-import React from "react";
 import ApexCharts from "react-apexcharts";
 
 const WeatherChart: React.FC<WeatherChartProps> = ({ hourlyTemperatures }) => {
